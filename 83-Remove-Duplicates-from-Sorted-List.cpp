@@ -11,24 +11,20 @@
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-        if(head == NULL) return head;
-        set<int> st;
-        while(head!=NULL) {
-            st.insert(head->val);
-            head = head->next;
+        ListNode* temp = head;
+        
+        while(temp != NULL )
+        { 
+            if(temp->next!=NULL)
+            {
+               if(temp->val == temp->next->val)
+                {
+                    temp->next = temp->next->next;
+                    continue;
+                }
+            }  
+            temp = temp->next;  
         }
-
-        ListNode* ans = new ListNode();
-        ListNode* finalans = ans;
-        int n = st.size();
-        for(auto it:st) {
-            ans->val = it;
-            ListNode* tmp = new ListNode();
-            if(n==1) continue;
-            n--;
-            ans->next = tmp;
-            ans = ans->next;
-        }
-        return finalans;
+        return head;
     }
 };
